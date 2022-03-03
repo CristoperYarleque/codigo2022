@@ -32,6 +32,7 @@ export class ProductoService {
 
   static async eliminar(id) {
     const productoEncontrado = await Producto.findById(id);
+    const productoEliminado = await Producto.findByIdAndDelete(id);
     if (productoEncontrado.categoriaProducto[0]) {
       const categoriaProductoId = await productoEncontrado.categoriaProducto[0];
 
@@ -60,13 +61,12 @@ export class ProductoService {
       await CategoriaProducto.findByIdAndDelete(categoriaProductoId);
     } else {
       return {
-        message: "no se encontro producto",
+        message: productoEliminado,
       };
     }
     if (productoEncontrado.imagen) {
       await fs.promises.unlink(productoEncontrado.imagen);
     }
-    const productoEliminado = await Producto.findByIdAndDelete(id);
     return productoEliminado;
   }
 }
