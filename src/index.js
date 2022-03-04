@@ -6,6 +6,8 @@ import { categoriaProductoRouter } from "./routes/categoria_producto.routes.js";
 import { imagenRouter } from "./routes/imagen.routes.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { usuarioRouter } from "./routes/usuario.routes.js";
+import { authRouter } from "./routes/auth.routes.js";
 
 const direccion_proyecto = dirname(fileURLToPath(import.meta.url));
 
@@ -18,6 +20,8 @@ app.use(productoRouter);
 app.use(categoriaRouter);
 app.use(categoriaProductoRouter);
 app.use(imagenRouter);
+app.use(usuarioRouter);
+app.use(authRouter);
 
 app.use("/src/media", express.static(direccion_proyecto + "/media"));
 

@@ -5,14 +5,15 @@ import {
   eliminarProducto,
   obtenerProductos,
 } from "../controller/producto.controller.js";
+import { validarUsuario } from "../utils/validador.js";
 
 export const productoRouter = Router();
 
-productoRouter.post("/producto", crearProducto);
+productoRouter.post("/producto", validarUsuario, crearProducto);
 
 productoRouter.get("/productos", obtenerProductos);
 
 productoRouter
   .route("/producto/:id")
   .put(actualizarProducto)
-  .delete(eliminarProducto);
+  .delete(validarUsuario, eliminarProducto);
