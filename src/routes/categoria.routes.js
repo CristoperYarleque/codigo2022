@@ -8,7 +8,8 @@ import {
 
 export const categoriaRouter = Router();
 
-categoriaRouter.route("/categoria").post(crearCategoria).get(obtenerCategorias);
+categoriaRouter.post("/categoria", crearCategoria);
+categoriaRouter.get("/categorias", obtenerCategorias);
 
 categoriaRouter
   .route("/categoria/:id")
