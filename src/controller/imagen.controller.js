@@ -3,7 +3,8 @@ import { ImagenService } from "../services/imagen.service.js";
 export async function subirImagen(req, res) {
   const { id } = req.params;
   try {
-    const respuesta = await ImagenService.subirImagen(id, req.file.path);
+    const imgUrl = `${process.env.DOMINIO}/${req.file.path}`;
+    const respuesta = await ImagenService.subirImagen(id, imgUrl);
     return res.status(200).json(respuesta);
   } catch (error) {
     return res
