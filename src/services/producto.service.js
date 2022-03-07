@@ -1,6 +1,7 @@
 import { Producto } from "../models/producto.model.js";
 import { Categoria } from "../models/categoria.model.js";
 import { CategoriaProducto } from "../models/categoria_producto.model.js";
+import { ArchivosService } from "./archivos.services.js";
 
 export class ProductoService {
   static async crear(data) {
@@ -14,9 +15,38 @@ export class ProductoService {
     }
   }
 
+  static async devolverProducto(id) {
+    const producto = await Producto.findById(id);
+
+    if (producto === undefined) {
+      return {
+        message: `no existe el producto con el id ${id}`,
+      };
+    }
+    const productoConImagen = {
+      ...producto._doc,
+      imagen: ArchivosService.devolverURL(producto.imagen),
+    };
+
+    return productoConImagen;
+  }
+
   static async listar() {
     const Productos = await Producto.find().sort({ nombre: "asc" });
-    return Productos;
+    const productosIterados = Productos.map((producto) => {
+      if (producto.imagen) {
+        return {
+          ...producto._doc,
+          imagen: ArchivosService.devolverURL(producto.imagen),
+        };
+      } else {
+        return {
+          ...producto._doc,
+        };
+      }
+    });
+
+    return productosIterados;
   }
 
   static async actualizar(data, id) {
@@ -32,6 +62,9 @@ export class ProductoService {
 
   static async eliminar(id) {
     const productoEncontrado = await Producto.findById(id);
+    if (await productoEncontrado.imagen) {
+      ArchivosService.eliminarArchivo(productoEncontrado.imagen);
+    }
     const productoEliminado = await Producto.findByIdAndDelete(id);
     if (productoEncontrado.categoriaProducto[0]) {
       const categoriaProductoId = await productoEncontrado.categoriaProducto[0];
@@ -63,9 +96,6 @@ export class ProductoService {
       return {
         message: productoEliminado,
       };
-    }
-    if (productoEncontrado.imagen) {
-      await fs.promises.unlink(productoEncontrado.imagen);
     }
     return productoEliminado;
   }

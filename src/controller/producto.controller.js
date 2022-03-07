@@ -14,6 +14,12 @@ export async function crearProducto(req, res) {
   }
 }
 
+export async function obtenerProducto(req, res) {
+  const { id } = req.params;
+  const resultado = await ProductoService.devolverProducto(id);
+  return res.status(200).json(resultado);
+}
+
 export async function obtenerProductos(req, res) {
   const resultado = await ProductoService.listar();
   return res.status(200).json(resultado);

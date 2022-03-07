@@ -1,29 +1,25 @@
 import express, { json } from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import { categoriaRouter } from "./routes/categoria.routes.js";
 import { productoRouter } from "./routes/producto.routes.js";
 import { categoriaProductoRouter } from "./routes/categoria_producto.routes.js";
-import { imagenRouter } from "./routes/imagen.routes.js";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import { usuarioRouter } from "./routes/usuario.routes.js";
 import { authRouter } from "./routes/auth.routes.js";
-
-const direccion_proyecto = dirname(fileURLToPath(import.meta.url));
+import { archivoRouter } from "./routes/archivos.routes.js";
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
 app.use(json());
+app.use(cors());
 
 app.use(productoRouter);
 app.use(categoriaRouter);
 app.use(categoriaProductoRouter);
-app.use(imagenRouter);
 app.use(usuarioRouter);
 app.use(authRouter);
-
-app.use("/src/media", express.static(direccion_proyecto + "/media"));
+app.use(archivoRouter);
 
 app.listen(PORT, async () => {
   console.log(`Servidor corriendo exitosamente en el puerto ${PORT}`);

@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-// import { Usuario } from "../models/usuario.model.js";
 
 export function verificarToken(token) {
   try {

@@ -3,6 +3,7 @@ import {
   actualizarProducto,
   crearProducto,
   eliminarProducto,
+  obtenerProducto,
   obtenerProductos,
 } from "../controller/producto.controller.js";
 import { validarUsuario } from "../utils/validador.js";
@@ -15,5 +16,6 @@ productoRouter.get("/productos", obtenerProductos);
 
 productoRouter
   .route("/producto/:id")
-  .put(actualizarProducto)
+  .get(obtenerProducto)
+  .put(validarUsuario, actualizarProducto)
   .delete(validarUsuario, eliminarProducto);
