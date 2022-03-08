@@ -31,10 +31,8 @@ export class ProductoService {
     return productoConImagen;
   }
 
-  static async listar({ page, limit, search }) {
-    const Productos = await Producto.find({
-      nombre: { $regex: `${search}`, $options: "i" },
-    })
+  static async listar({ page, limit }) {
+    const Productos = await Producto.find()
       .sort({ nombre: "asc" })
       .skip(page)
       .limit(limit);
