@@ -31,8 +31,11 @@ export class ProductoService {
     return productoConImagen;
   }
 
-  static async listar() {
-    const Productos = await Producto.find().sort({ nombre: "asc" });
+  static async listar({ page, limit }) {
+    const Productos = await Producto.find()
+      .sort({ nombre: "asc" })
+      .skip(page)
+      .limit(limit);
     const productosIterados = Productos.map((producto) => {
       if (producto.imagen) {
         return {
