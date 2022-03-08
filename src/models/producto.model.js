@@ -16,7 +16,7 @@ const productoSchema = new mongoose.Schema({
     // required: true,
   },
   precio: {
-    type: mongoose.Schema.Types.Decimal128,
+    type: mongoose.Schema.Types.Number,
     required: true,
     default: 0.0,
     max: 1000.0,
