@@ -1,6 +1,7 @@
 import { Categoria } from "../models/categoria.model.js";
 import { CategoriaProducto } from "../models/categoria_producto.model.js";
 import { Producto } from "../models/producto.model.js";
+import { ArchivosService } from "./archivos.services.js";
 
 export class CategoriaService {
   static async crear(data) {
@@ -36,10 +37,18 @@ export class CategoriaService {
       categoria.categoriaProducto.map(async (catProd) => {
         const categoriaProducto = await CategoriaProducto.findById(catProd);
         const prod = await Producto.findById(categoriaProducto.productoId);
-        return prod;
+        if (prod.imagen) {
+          const result = {
+            ...prod._doc,
+            imagen: ArchivosService.devolverURL(prod.imagen),
+          };
+          return result;
+        } else {
+          const result = { ...prod._doc };
+          return result;
+        }
       })
     );
-
     return { ...categoria._doc, productos };
   }
 }
