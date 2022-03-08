@@ -21,8 +21,14 @@ export async function obtenerProducto(req, res) {
 }
 
 export async function obtenerProductos(req, res) {
-  const { page, limit } = req.query;
-  const resultado = await ProductoService.listar({ page, limit });
+  const { page, limit, search } = req.query;
+  const resultado = await ProductoService.listar({ page, limit, search });
+  return res.status(200).json(resultado);
+}
+
+export async function obtenerBusqueda(req, res) {
+  const { search } = req.query;
+  const resultado = await ProductoService.listarBusqueda({ search });
   return res.status(200).json(resultado);
 }
 

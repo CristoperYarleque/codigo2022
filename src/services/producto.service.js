@@ -31,11 +31,33 @@ export class ProductoService {
     return productoConImagen;
   }
 
-  static async listar({ page, limit }) {
-    const Productos = await Producto.find()
+  static async listar({ page, limit, search }) {
+    const Productos = await Producto.find({
+      nombre: { $regex: `${search}`, $options: "i" },
+    })
       .sort({ nombre: "asc" })
       .skip(page)
       .limit(limit);
+    const productosIterados = Productos.map((producto) => {
+      if (producto.imagen) {
+        return {
+          ...producto._doc,
+          imagen: ArchivosService.devolverURL(producto.imagen),
+        };
+      } else {
+        return {
+          ...producto._doc,
+        };
+      }
+    });
+
+    return productosIterados;
+  }
+
+  static async listarBusqueda({ search }) {
+    const Productos = await Producto.find({
+      nombre: { $regex: `${search}`, $options: "i" },
+    }).sort({ nombre: "asc" });
     const productosIterados = Productos.map((producto) => {
       if (producto.imagen) {
         return {
