@@ -9,7 +9,7 @@ import { authRouter } from "./routes/auth.routes.js";
 import { archivoRouter } from "./routes/archivos.routes.js";
 
 const app = express();
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env.PORT ?? 4000;
 
 app.use(json());
 app.use(cors());
