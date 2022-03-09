@@ -1,21 +1,12 @@
 import { s3 } from "../s3.js";
 import { Producto } from "../models/producto.model.js";
+import { hashSync } from "bcrypt";
 
 export class ArchivosService {
   static async crearArchivo(data) {
-    // const productoEncontrado = await Producto.findOne({
-    //   _id: data.productoId,
-    // });
-    // if (productoEncontrado.imagen) {
-    //   return {
-    //     message:
-    //       "El producto ya tiene una imagen, primero eliminela y luego vuelva a crear el archivo",
-    //   };
-    // }
-
     const path = `archivos/productos/${data.productoId}`;
 
-    const Key = `${path}/${data.filename}.${data.ext}`;
+    const Key = `${path}/${hashSync(data.filename, 10)}.${data.ext}`;
 
     const url = s3.getSignedUrl("putObject", {
       Key,
