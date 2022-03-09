@@ -15,6 +15,10 @@ const productoSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.String,
     // required: true,
   },
+  cantidad: {
+    type: mongoose.Schema.Types.Number,
+    required: true,
+  },
   precio: {
     type: mongoose.Schema.Types.Number,
     required: true,
