@@ -50,4 +50,42 @@ export class CategoriaProductoService {
 
     return nuevoRegistro;
   }
+
+  static async eliminar({ categoriaId, productoId }) {
+    const productoEncontrado = await Producto.findById(productoId);
+    const categoriaEncontrada = await Categoria.findById(categoriaId);
+    if (!categoriaEncontrada || !productoEncontrado) {
+      return {
+        message: "Categoria o Producto Invalido",
+      };
+    }
+    const categoriaProductoEncontrada = await CategoriaProducto.findOne({
+      categoriaId,
+      productoId,
+    });
+
+    if (productoEncontrado.categoriaProducto[0]) {
+      const categoriaProductoId = await productoEncontrado.categoriaProducto[0];
+      const categoriaProductoEncontradaId = await categoriaEncontrada._id;
+      let objetos = [];
+      let objeto = [];
+      const resultado = (data) => {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].toString() !== categoriaProductoId.toString()) {
+            objetos.push(data[i]);
+          }
+        }
+      };
+      resultado(categoriaEncontrada.categoriaProducto);
+      await Categoria.findByIdAndUpdate(categoriaId, {
+        categoriaProducto: objetos,
+      });
+      await Producto.findByIdAndUpdate(productoId, {
+        categoriaProducto: objeto,
+      });
+      await CategoriaProducto.findByIdAndDelete(
+        categoriaProductoEncontradaId.toString()
+      );
+    }
+  }
 }
