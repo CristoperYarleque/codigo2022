@@ -1,6 +1,6 @@
 import validator from "validator";
 
-export function productoDto({ nombre, precio, descripcion, imagen }) {
+export function productoDto({ nombre, precio, descripcion, imagen, cantidad }) {
   if (validator.isEmpty(nombre)) {
     throw Error("el nombre no puede estar vacio");
   }
@@ -10,5 +10,8 @@ export function productoDto({ nombre, precio, descripcion, imagen }) {
   if (validator.isEmpty(descripcion)) {
     throw Error("La descripcion no puede estar vacia");
   }
-  return { nombre, precio, descripcion, imagen };
+  if (validator.isEmpty(cantidad)) {
+    throw Error("la cantidad no puede estar vacia");
+  }
+  return { nombre, precio, descripcion, imagen, cantidad };
 }
