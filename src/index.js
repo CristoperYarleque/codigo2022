@@ -11,7 +11,7 @@ import { archivoRouter } from "./routes/archivos.routes.js";
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
-const listaBlanca = ["http://localhost:3000"];
+const listaBlanca = ["http://localhost:3000", "https://codigo2021.vercel.app"];
 
 app.use(json());
 app.use(cors({ origin: listaBlanca }));
