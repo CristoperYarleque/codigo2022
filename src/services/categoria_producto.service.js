@@ -66,7 +66,8 @@ export class CategoriaProductoService {
 
     if (productoEncontrado.categoriaProducto[0]) {
       const categoriaProductoId = await productoEncontrado.categoriaProducto[0];
-      const categoriaProductoEncontradaId = await categoriaEncontrada._id;
+      const categoriaProductoEncontradaId =
+        await categoriaProductoEncontrada._id.toString();
       let objetos = [];
       let objeto = [];
       const resultado = (data) => {
@@ -83,9 +84,7 @@ export class CategoriaProductoService {
       await Producto.findByIdAndUpdate(productoId, {
         categoriaProducto: objeto,
       });
-      await CategoriaProducto.findByIdAndDelete(
-        categoriaProductoEncontradaId.toString()
-      );
+      await CategoriaProducto.findByIdAndDelete(categoriaProductoEncontradaId);
     }
   }
 }
