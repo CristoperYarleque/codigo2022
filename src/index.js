@@ -11,8 +11,10 @@ import { archivoRouter } from "./routes/archivos.routes.js";
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
+const listaBlanca = ["http://localhost:3000"];
+
 app.use(json());
-app.use(cors());
+app.use(cors({ origin: listaBlanca }));
 
 app.use(productoRouter);
 app.use(categoriaRouter);
