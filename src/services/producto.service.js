@@ -86,7 +86,9 @@ export class ProductoService {
   static async eliminar(id) {
     const productoEncontrado = await Producto.findById(id);
     if (await productoEncontrado.imagen) {
-      ArchivosService.eliminarArchivo(productoEncontrado.imagen);
+      const id = await productoEncontrado._id.toString();
+      const path = `archivos/productos/${id}`;
+      ArchivosService.eliminarArchivo(path);
     }
     const productoEliminado = await Producto.findByIdAndDelete(id);
     if (productoEncontrado.categoriaProducto[0]) {
