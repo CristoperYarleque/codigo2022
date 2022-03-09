@@ -3,16 +3,15 @@ import { Producto } from "../models/producto.model.js";
 
 export class ArchivosService {
   static async crearArchivo(data) {
-    const productoEncontrado = await Producto.findOne({
-      _id: data.productoId,
-    });
-    console.log(productoEncontrado);
-    if (productoEncontrado.imagen) {
-      return {
-        message:
-          "El producto ya tiene una imagen, primero eliminela y luego vuelva a crear el archivo",
-      };
-    }
+    // const productoEncontrado = await Producto.findOne({
+    //   _id: data.productoId,
+    // });
+    // if (productoEncontrado.imagen) {
+    //   return {
+    //     message:
+    //       "El producto ya tiene una imagen, primero eliminela y luego vuelva a crear el archivo",
+    //   };
+    // }
 
     const path = `archivos/productos/${data.productoId}`;
 
