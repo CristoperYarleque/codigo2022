@@ -23,7 +23,7 @@ const productoSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Number,
     required: true,
     default: 0.0,
-    max: 1000.0,
+    max: 900.0,
   },
   categoriaProducto: {
     type: [mongoose.Schema.Types.ObjectId],
