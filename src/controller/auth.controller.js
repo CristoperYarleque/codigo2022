@@ -8,8 +8,20 @@ export async function login(req, res) {
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({
-      error: error.message,
+      // error: error.message,
       message: "Datos incorrectos ,Error al hacer el login",
+    });
+  }
+}
+
+export async function validarCorreo(req, res) {
+  try {
+    const { correo } = req.body;
+    const result = await AuthService.validarCorreo({ correo });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({
+      message: "ingresar correo correcto",
     });
   }
 }
