@@ -100,6 +100,7 @@ export class FacturacionService {
             const year = fecha.getFullYear();
             const fecha_de_emision = day + "-" + month + "-" + year;
 
+            console.log(numero);
             const bodyNubefact = {
                 operacion: "generar_comprobante",
                 tipo_de_comprobante,
