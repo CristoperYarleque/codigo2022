@@ -8,6 +8,7 @@ import { usuarioRouter } from "./routes/usuario.routes.js";
 import { authRouter } from "./routes/auth.routes.js";
 import { archivoRouter } from "./routes/archivos.routes.js";
 import { ventaRouter } from "./routes/venta_producto.routes.js";
+import { facturacionRouter } from "./routes/facturacion.routes.js";
 
 const app = express();
 const PORT = process.env.PORT ?? 4000;
@@ -22,6 +23,7 @@ app.use(usuarioRouter);
 app.use(authRouter);
 app.use(archivoRouter);
 app.use(ventaRouter)
+app.use(facturacionRouter)
 
 app.listen(PORT, async () => {
   console.log(`Servidor corriendo exitosamente en el puerto ${PORT}`);

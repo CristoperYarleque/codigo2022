@@ -33,6 +33,7 @@ export class AuthService {
       return {
         message: "existe",
         correo: usuarioEncontrado.correo,
+        usuario: usuarioEncontrado
       };
     } else if (!usuarioEncontrado) {
       return {

@@ -18,6 +18,14 @@ const usuarioSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.String,
     required: true,
   },
+  numero_documento: {
+    type: mongoose.Schema.Types.String
+  },
+  tipo_documento: {
+    enum: ["DNI", "RUC", "CE", "PASAPORTE"],
+    type: mongoose.Schema.Types.String,
+    default: "DNI",
+  },
   admin: {
     type: mongoose.Schema.Types.Boolean,
   },

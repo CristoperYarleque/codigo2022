@@ -55,6 +55,9 @@ const ventaProductoSchema = new mongoose.Schema({
     estado_id: {
         type: mongoose.Schema.Types.String,
     },
+    idBoleta: {
+        type: mongoose.Schema.Types.String,
+    },
     juegos: [juegosSchema]
 });
 
