@@ -5,7 +5,7 @@ export function loginDto({ correo, password }) {
     throw Error("El correo debe ser un correo valido");
   }
 
-  if (!validator.isStrongPassword(password)) {
+  if (validator.isEmpty(password)) {
     throw Error(
       "La contraseña no es lo suficientemente segura, debe tener al menos una Mayus, una minus, un numero, un simbolo y una longitud minima de 8 caracteres"
     );
