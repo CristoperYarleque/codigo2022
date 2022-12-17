@@ -29,10 +29,7 @@ app.listen(PORT, async () => {
   console.log(`Servidor corriendo exitosamente en el puerto ${PORT}`);
   try {
     await mongoose.connect(
-//       process.env.NODE_ENV === "production"
-//         ? 
-      process.env.DATABASE_URL
-//         : process.env.DATABASE_URL_DEV
+      process.env.NODE_ENV === "production" ? process.env.DATABASE_URL : process.env.DATABASE_URL_DEV
     );
     console.log("Bd sincronizada exitosamente");
   } catch (error) {
