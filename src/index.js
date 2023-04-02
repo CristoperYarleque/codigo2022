@@ -29,15 +29,9 @@ app.listen(PORT, async () => {
   console.log(`Servidor corriendo exitosamente en el puerto ${PORT}`);
   try {
     await mongoose.connect(
-<<<<<<< HEAD
-      // process.env.NODE_ENV === "production"
-        // ? 
-        process.env.DATABASE_URL
-        // : 
-        // process.env.DATABASE_URL_DEV
-=======
-      process.env.NODE_ENV === "production" ? process.env.DATABASE_URL : process.env.DATABASE_URL_DEV
->>>>>>> cf67a5553e182b9bef4b5f55f41eb1d420b896c9
+      // process.env.NODE_ENV === "production" ? 
+      process.env.DATABASE_URL 
+      // : process.env.DATABASE_URL_DEV
     );
     console.log("Bd sincronizada exitosamente");
   } catch (error) {
